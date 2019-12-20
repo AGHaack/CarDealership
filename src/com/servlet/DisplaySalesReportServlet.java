@@ -3,6 +3,7 @@ package com.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,15 +36,12 @@ public class DisplaySalesReportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Customer c = new Customer();
 		
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		try {
-			customers = c.loadSalesReport();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		ArrayList<Customer> customers = c.loadSalesReport();
+		ArrayList<Customer> sortedCs = c.sortSalesReport(customers);
+	
 		
 		HttpSession session =request.getSession(true);
-		session.setAttribute("customers", customers);
+		session.setAttribute("customers", sortedCs);
 		RequestDispatcher rs = request.getRequestDispatcher("salesreport.jsp");
 		rs.forward(request, response);
 	}

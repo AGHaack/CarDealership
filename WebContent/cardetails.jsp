@@ -37,36 +37,48 @@
     		</form>
   		</div>
 	</nav>
-	<img src="${car.mainPicFile}" alt="All that vroom!">
-	<c:if test="${car.preOwned eq true}">
-        <h1>Used</h1>
-    </c:if>
-    <c:if test="${not car.preOwned}">
-        <h1>New</h1>
-    </c:if>
-    <c:if test="${car.inAuction eq true}">
-    	<h3>In Auction!</h3>
-    </c:if>
-	<table>
-		<tr class="bg-primary">
-			<td>Make</td>
-			<td>Model</td>
-			<td>Year</td>
-			<td>Color</td>
-			<td>Price</td>
-		</tr>
-		<tr class="bg-success">
-			<td>${car.make}</td>
-			<td>${car.model}</td>
-			<td>${car.year}</td>
-			<td>${car.color}</td>
-			<td><strong>$</strong>${car.price}</td>
-		</tr>
-	</table>
+	<div style="margin-bottom: 20px;">
+	<img src="${car.mainPicFile}" alt="All that vroom!" style="width: 700px; height:500px; padding-top: 5px; ">
+	<div style="float: right; font-size: 2em; padding-right:75px">
+		<h1>Basic Info</h1>
+		<table class="table table-bordered">
+			<tr class="bg-primary">
+				<td><strong>Make</strong></td>
+				<td>${car.make}</td>
+			</tr>
+			<tr class="bg-success">
+				<td><strong>Model</strong></td>
+				<td>${car.model}</td>
+			</tr>
+			<tr class="bg-primary">
+				<td><strong>Year</strong></td>
+				<td>${car.year}</td>
+			</tr>
+			<tr class="bg-success">
+				<td><strong>Color</strong></td>
+				<td>${car.color}</td>
+			</tr>
+			<tr class="bg-primary">
+				<td><strong>Price</strong></td>
+				<td><strong>$</strong>${car.price}</td>
+			</tr>
+		</table>
+		<c:if test="${car.preOwned eq true}">
+        	<h1>Used</h1>
+    	</c:if>
+    	<c:if test="${not car.preOwned}">
+        	<h1>New</h1>
+    	</c:if>
+    	<c:if test="${car.inAuction eq true}">
+    		<h3>In Auction!</h3>
+    	</c:if>
+	</div>
+	</div>
+	
 	<br>
 	<table>
 		<tr class="bg=primary">
-			<td>Description</td>
+			<td><h4>Description:</h4></td>
 		</tr>
 		<tr class="bg-success">
 			<td>${car.description}</td>

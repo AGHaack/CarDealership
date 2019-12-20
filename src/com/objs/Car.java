@@ -119,7 +119,6 @@ public class Car
 	public String formatString() 
 	{
 		
-		
 		String text = this.preOwned+"#"+this.inAuction+"#"+this.vinNum+"#"+this.make+"#"+this.model+"#"+this.year+"#"+this.color+"#"+this.price+"#"+this.description+"#"+this.mileage+"#"+this.purchaseDate+"#"+this.mainPicFile;
 		return text;
 	}
@@ -189,7 +188,7 @@ public class Car
 		return carInventory;
 	}
 	
-	public void updateInventory(ArrayList<Car> cars) throws ParseException 
+	public void updateInventory(ArrayList<Car> cars) 
 	{
 		String fileName = path+"carinventory.txt";
 		try
@@ -232,8 +231,5 @@ public class Car
 		
 		
 	}
-	
-	
-	
 	
 }

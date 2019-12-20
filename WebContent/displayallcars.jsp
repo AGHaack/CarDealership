@@ -38,22 +38,22 @@
     		</form>
   		</div>
 	</nav>
-	<c:forEach var="car" items="${cars}">
-	
-	  <figure class="figure">
-        <img src="${car.mainPicFile}" class="figure-img img-fluid rounded" alt="Some Vroom-Vroom">
+	<div class="text-center">
+	<c:forEach var="car" items="${cars}"> 
+	  <figure class="figure" style="padding-left:5px; padding-right:5px;">
+        	<img src="${car.mainPicFile}" class="figure-img img-fluid rounded img-responsive" style="padding-top: 5px; width: 500px; height: 250px;" alt="Some Vroom-Vroom">
         <figcaption class="figure-caption">
           <c:if test="${not car.inAuction}">
-            <h1>Check Out this Fast Car!</h1>
+            <h3>Check Out this Fast Car!</h3>
+          </c:if>
+          <c:if test="${car.inAuction eq true}">
+          	<h3 style="color: red;">In Auction!</h3>
           </c:if>
           <c:if test="${car.preOwned eq true}">
         	<h5>Used</h5>
           </c:if>
           <c:if test="${not car.preOwned}">
         	<h5>New</h5>
-          </c:if>
-          <c:if test="${car.inAuction eq true}">
-          	<h3>In Auction!</h3>
           </c:if>
           <h6>${car.make}</h6>
           <h6>${car.model}</h6>
@@ -63,6 +63,7 @@
         </figcaption>
        </figure>
 	 </c:forEach>
+	 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

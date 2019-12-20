@@ -1,2 +1,4 @@
-12/16/19#Fleetwood Mac#false#20834037109#Audi#R8#0#100000#Brett#null#wewentbloos@goblues.com#(314) 413-3434
+12/16/2019#Fleetwood Mac#false#20834037109#Audi#R8#0#100000#Brett#null#wewentbloos@goblues.com#(314) 413-3434
 12/01/2019#Whitney Houston#false#1234567890#Mercedes#AMG GT S#2018#150001#Mustang#null#lkasjbv@email.com#(314) 413-3434
+11/16/2019#Nikki Sixx#false#v6627849djja773291#Mercedes#E300 4Matic#2019#3000000#Soldad#null#Winkleface@yahoo.com#(555) 555-6568
+12/03/2019#Emma Watson#false#8839001094njnf88302nv71#Jeep#Wrangler Rubicon 4x4#2018#400000#Roxwell#null#elvisisntdead@yahoo.com#(555) 555-7222

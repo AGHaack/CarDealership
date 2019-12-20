@@ -53,7 +53,7 @@ $(function() {
         <input type="text" class="form-control" placeholder="Customer's first name" name="firstName">
       </div>
       <div class="col">
-        <input type="text" class="form-control" placeholder="Customer's last name" name="lasyName">
+        <input type="text" class="form-control" placeholder="Customer's last name" name="lastName">
       </div>
     </div>
     <br>

@@ -40,24 +40,23 @@ public class SellCarServlet extends HttpServlet {
 		Car carSold = new Car();
 		
 		ArrayList<Car> carInventory = new ArrayList<Car>();
+		
 		try {
 			carInventory = carSold.loadInventory();
-		} catch (ParseException e1) {
+		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e2.printStackTrace();
 		}
+		
 		for(Car c : carInventory)
 		{
 			if(c.getVinNum().equals(vinNum))
 			{
 				carSold = c;
 				carInventory.remove(carSold);
-				try {
-					carSold.updateInventory(carInventory);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
+				carSold.updateInventory(carInventory);
+				
 				break;
 			}
 			
@@ -77,16 +76,9 @@ public class SellCarServlet extends HttpServlet {
 			c.setSalePrice(Integer.parseInt(salePrice));
 			c.setVinSold(vinNum);
 			c.setFirstName(request.getParameter("firstName"));
-			String dateOfSale = request.getParameter("dateOfSale");
-			Date date = null;
-			try {
-				date = new SimpleDateFormat("MM/dd/yyyy").parse(dateOfSale);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 					
-			c.setDateOfSale(date);
+			c.setDateOfSale(request.getParameter("dateOfSale"));
 			c.setLastName(request.getParameter("lastName"));
 			c.setPhoneNum(request.getParameter("phoneNum"));
 			c.setEmail(request.getParameter("email"));
@@ -94,13 +86,8 @@ public class SellCarServlet extends HttpServlet {
 			c.setMakeSold(carSold.getMake());
 			c.setModelSold(carSold.getModel());
 			c.setYearSold(carSold.getYear());
-			try {
-				c.updateSalesReport();
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
+			c.updateSalesReport();
+		
 			HttpSession session = request.getSession(true);
 			session.setAttribute("msg", "Congrats on your sale!");
 			RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");

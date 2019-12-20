@@ -10,18 +10,21 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class Customer 
+public class Customer
 {
 	private String firstName;
 	private String lastName;
 	private String phoneNum;
 	private String email;
-	private Date dateOfSale;
+	private String dateOfSale;
 	private String salesRep;
 	private String vinSold;
 	private boolean preOwned;
@@ -36,7 +39,7 @@ public class Customer
 		
 	}
 
-	public Customer(String firstName, String lastName, String phoneNum, String email, Date dateOfSale,
+	public Customer(String firstName, String lastName, String phoneNum, String email, String dateOfSale,
 			String salesRep, String vinSold, boolean preOwned, String makeSold, String modelSold, int salePrice, int yearSold) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -84,11 +87,11 @@ public class Customer
 		this.email = email;
 	}
 
-	public Date getDateOfSale() {
+	public String getDateOfSale() {
 		return dateOfSale;
 	}
 
-	public void setDateOfSale(Date dateOfSale) {
+	public void setDateOfSale(String dateOfSale) {
 		this.dateOfSale = dateOfSale;
 	}
 
@@ -148,15 +151,13 @@ public class Customer
 		this.yearSold = yearSold;
 	}
 
-	public String formatString() throws ParseException
+	public String formatString()
 	{
-		String date = this.dateOfSale.toString();
-		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-		Date date1 = format.parse(date);
-		String text = date1+"#"+this.salesRep+"#"+this.preOwned+"#"+this.vinSold+"#"+this.makeSold+"#"+this.modelSold+"#"+this.yearSold+"#"+this.salePrice+"#"+this.firstName+"#"+this.lastName+"#"+this.email+"#"+this.phoneNum;
+		
+		String text = this.dateOfSale+"#"+this.salesRep+"#"+this.preOwned+"#"+this.vinSold+"#"+this.makeSold+"#"+this.modelSold+"#"+this.yearSold+"#"+this.salePrice+"#"+this.firstName+"#"+this.lastName+"#"+this.email+"#"+this.phoneNum;
 		return text;
 	}
-	public void updateSalesReport() throws ParseException
+	public void updateSalesReport()
 	{
 		String fileName = path+"salesreport.txt";
 		try
@@ -171,7 +172,7 @@ public class Customer
 		}
 	}
 	
-	public ArrayList<Customer> loadSalesReport() throws ParseException
+	public ArrayList<Customer> loadSalesReport()
 	{
 		File file = new File(path+"salesreport.txt");
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -182,8 +183,7 @@ public class Customer
 			{
 				String[] parsedLine = line.split("#");
 				Customer c = new Customer();
-				Date dateOfSale = new SimpleDateFormat("MM/dd/yyyy").parse(parsedLine[0]);
-				c.setDateOfSale(dateOfSale);
+				c.setDateOfSale(parsedLine[0]);
 				c.setSalesRep(parsedLine[1]);
 				if(parsedLine[2].equals("true"))
 				{
@@ -209,23 +209,54 @@ public class Customer
 			System.out.println("Error reading from file.");
 		}
 		
-		Collections.sort(customers, new Comparator<Customer>() {
-			public int compare(Customer c1, Customer c2) {
-				return c1.getDateOfSale().compareTo(c2.getDateOfSale());
-			}
-		});
 		
 		
 		return customers;
 	}
 	
+	public ArrayList<Customer> sortSalesReport(ArrayList<Customer> customers)
+	{
+		ArrayList<Customer> sortedSalesReport = new ArrayList<Customer>();
+		
+		int[] newDays = new int[customers.size()];
+		for(Customer c : customers)
+		{
+			String date = c.getDateOfSale();
+			String temp = date.substring(6)+date.substring(0, 2)+date.substring(3,5);
+			newDays[customers.indexOf(c)] = Integer.parseInt(temp);
+		}
+		Arrays.sort(newDays);
+		ArrayList<String> sortedDates = new ArrayList<String>();
+		StringBuilder sb = new StringBuilder();
+		for(int i : newDays)
+		{
+			String sortedDate = Integer.toString(i);
+			sb.append(sortedDate.substring(4, 6));
+			sb.append("/");
+			sb.append(sortedDate.substring(6));
+			sb.append("/");
+			sb.append(sortedDate.substring(0, 4));
+			sortedDates.add(sb.toString());
+			sb.delete(0, sb.length());
+			
+		}
+		for(String date : sortedDates)
+		{
+			for(Customer c: customers)
+			{
+				String dos = c.getDateOfSale();
+				if(dos.equals(date))
+				{
+					sortedSalesReport.add(sortedDates.indexOf(date), c);
+				}
+			}
+			
+			
+		}
+		
+		Collections.reverse(sortedSalesReport);
+		return sortedSalesReport;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

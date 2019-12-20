@@ -83,12 +83,9 @@ public class UpdateServlet extends HttpServlet {
 			updatedCar.setMainPicFile(carToUpdate.getMainPicFile());
 		}
 		carInventory.add(updatedCar);
-		try {
-			updatedCar.updateInventory(carInventory);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+		updatedCar.updateInventory(carInventory);
+		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("msg", "The inventory of Fast Cars has been updated.");
 		RequestDispatcher rs = request.getRequestDispatcher("profile.jsp");
